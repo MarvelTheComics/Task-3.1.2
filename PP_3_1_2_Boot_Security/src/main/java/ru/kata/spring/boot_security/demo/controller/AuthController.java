@@ -27,18 +27,18 @@ public class AuthController {
         this.roleService = roleService;
     }
     @GetMapping
-    private String indexPage() {
+    public String indexPage() {
         return "shared/index";
     }
 
     @GetMapping("/registration")
-    private String registrationPage(Model model) {
+    public String registrationPage(Model model) {
         model.addAttribute("user", new User());
         return "shared/registration";
     }
 
     @PostMapping("/registration")
-    private String createUser(@ModelAttribute("user") User user) {
+    public String createUser(@ModelAttribute("user") User user) {
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.getRole(1));
         userService.add(user, roles);

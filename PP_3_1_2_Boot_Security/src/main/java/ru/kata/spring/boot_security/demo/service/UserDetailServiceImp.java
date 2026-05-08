@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.security.UserDetailsImp;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +28,6 @@ public class UserDetailServiceImp implements UserDetailsService {
         User user = userDao.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 
-
-        return new ru.kata.spring.boot_security.demo.security.UserDetailsImp(user, authorities);
+        return new UserDetailsImp(user, authorities);
     }
 }

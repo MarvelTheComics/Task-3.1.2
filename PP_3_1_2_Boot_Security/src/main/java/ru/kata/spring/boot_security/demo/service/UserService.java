@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface UserService {
-    User getUser();
+    User getUser(String username);
     void add(User user, Set<Role> roles);
     void delete(Integer id);
     void update(User user);
