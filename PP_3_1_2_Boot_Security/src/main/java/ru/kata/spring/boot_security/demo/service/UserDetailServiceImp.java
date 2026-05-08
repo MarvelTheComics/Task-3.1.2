@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +15,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserDetailServiceImp implements UserDetailsService {
-    private UserDao userDao;
-    @Autowired
+    private final UserDao userDao;
+
     public UserDetailServiceImp(UserDao userDao) {
         this.userDao = userDao;
     }
@@ -29,6 +28,6 @@ public class UserDetailServiceImp implements UserDetailsService {
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 
 
-        return new ru.kata.spring.boot_security.demo.security.UserDetails(user, authorities);
+        return new ru.kata.spring.boot_security.demo.security.UserDetailsImp(user, authorities);
     }
 }
