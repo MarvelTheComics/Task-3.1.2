@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,7 +32,7 @@ public class User {
     private String eyeColor;
     @Column(name = "Password")
     private String password;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(
             name = "User_role",
             joinColumns = @JoinColumn(name = "user_id"),

@@ -1,7 +1,5 @@
 package ru.kata.spring.boot_security.demo.service;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -54,11 +52,5 @@ public class UserServiceImp implements UserService{
     @Override
     public User getUserByID(Integer id) {
         return userDao.getUserByID(id);
-    }
-
-    @Transactional
-    @Override
-    public User getUser(String username) {
-        return userDao.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
     }
 }
